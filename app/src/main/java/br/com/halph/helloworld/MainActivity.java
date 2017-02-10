@@ -1,5 +1,6 @@
 package br.com.halph.helloworld;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button buttonCalcula = (Button) findViewById(R.id.buttonCalcula);
-        clickButton.setOnClickListener( new View.OnClickListener() {
+        buttonCalcula.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -54,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button buttonProximaTela = (Button) findViewById(R.id.btnProximaTela);
+        buttonProximaTela.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                trocaTela();
+            }
+        });
 
         this.textNome = (EditText) findViewById(R.id.textNome);
         this.textResultado = (EditText) findViewById(R.id.textResultado);
@@ -75,9 +84,15 @@ public class MainActivity extends AppCompatActivity {
     public void calcula() {
         int valorUm = Integer.parseInt(textValorUm.getText().toString());
         int valorDois = Integer.parseInt(textValorDois.getText().toString());
-        this.textResultadoCalculo.setText(valorUm + valorDois);
+        this.textResultadoCalculo.setText(Integer.toString(valorUm + valorDois));
     }
 
+    public void trocaTela() {
+        Intent intent = new Intent(this, Relatorio.class);
+        intent.putExtra("nome", textNome.getText().toString());
+        intent.putExtra("valorCalculo", textResultadoCalculo.getText().toString());
+        startActivity(intent);
+    }
 
 
 }
