@@ -1,98 +1,73 @@
 package br.com.halph.helloworld;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText textNome;
+    @BindView(R.id.textNome)
+    EditText textNome;
 
-    private EditText textResultado;
+    @BindView(R.id.textResultado)
+    EditText textResultado;
 
-    private CheckBox checkBoxUm;
+    @BindView(R.id.checkBoxUm)
+    CheckBox checkBoxUm;
 
-    private CheckBox checkBoxDois;
+    @BindView(R.id.checkBoxDois)
+    CheckBox checkBoxDois;
 
-    private CheckBox checkBoxTres;
+    @BindView(R.id.checkBoxTres)
+    CheckBox checkBoxTres;
 
-    private RadioButton radioButtonUm;
+    @BindView(R.id.radioValorUm)
+    RadioButton radioButtonUm;
 
-    private RadioButton radioButtonDois;
+    @BindView(R.id.radioValorDois)
+    RadioButton radioButtonDois;
 
-    private EditText textValorUm;
+    @BindView(R.id.textValorUm)
+    EditText textValorUm;
 
-    private EditText textValorDois;
+    @BindView(R.id.textValorDois)
+    EditText textValorDois;
 
-    private EditText textResultadoCalculo;
+    @BindView(R.id.textResultadoValor)
+    EditText textResultadoCalculo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button clickButton = (Button) findViewById(R.id.buttonClick);
-        clickButton.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                helloWorld();
-            }
-        });
-
-        Button buttonCalcula = (Button) findViewById(R.id.buttonCalcula);
-        buttonCalcula.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                calcula();
-            }
-        });
-
-        Button buttonProximaTela = (Button) findViewById(R.id.btnProximaTela);
-        buttonProximaTela.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                trocaTela();
-            }
-        });
-
-        this.textNome = (EditText) findViewById(R.id.textNome);
-        this.textResultado = (EditText) findViewById(R.id.textResultado);
-        this.checkBoxUm = (CheckBox) findViewById(R.id.checkBoxUm);
-        this.checkBoxDois = (CheckBox) findViewById(R.id.checkBoxDois);
-        this.checkBoxTres = (CheckBox) findViewById(R.id.checkBoxTres);
-        this.radioButtonUm = (RadioButton) findViewById(R.id.radioValorUm);
-        this.radioButtonDois = (RadioButton) findViewById(R.id.radioValorDois);
-        this.textValorUm = (EditText) findViewById(R.id.textValorUm);
-        this.textValorDois = (EditText) findViewById(R.id.textValorDois);
-        this.textResultadoCalculo = (EditText) findViewById(R.id.textResultadoValor);
+        ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.buttonClick)
     public void helloWorld() {
         String text = "Hello ";
         this.textResultado.setText(text + this.textNome.getText());
     }
 
+    @OnClick(R.id.buttonCalcula)
     public void calcula() {
         int valorUm = Integer.parseInt(textValorUm.getText().toString());
         int valorDois = Integer.parseInt(textValorDois.getText().toString());
         this.textResultadoCalculo.setText(Integer.toString(valorUm + valorDois));
     }
 
+    @OnClick(R.id.btnProximaTela)
     public void trocaTela() {
         Intent intent = new Intent(this, Relatorio.class);
         intent.putExtra("nome", textNome.getText().toString());
         intent.putExtra("valorCalculo", textResultadoCalculo.getText().toString());
         startActivity(intent);
     }
-
-
 }

@@ -44,4 +44,8 @@ dependencies {
         exclude module: 'javax.annotation-api'
         exclude module: 'support-annotations'
     }
+
+    // https://mvnrepository.com/artifact/com.jakewharton/butterknife
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
